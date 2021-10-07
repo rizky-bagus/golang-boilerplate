@@ -14,6 +14,7 @@ type Config struct {
 	Env            string `env:"ENV,default=development"`
 	Database       DatabaseConfig
 	JWTConfig      JWTConfig
+	Cloudinary     CloudinaryConfig
 	InternalConfig InternalConfig
 }
 
@@ -24,6 +25,13 @@ type DatabaseConfig struct {
 	Username string `env:"DATABASE_USERNAME,required"`
 	Password string `env:"DATABASE_PASSWORD,required"`
 	Name     string `env:"DATABASE_NAME,required"`
+}
+
+type CloudinaryConfig struct {
+	Name   string `env:"CLOUDINARY_NAME,required"`
+	Key    string `env:"CLOUDINARY_API_KEY,required"`
+	Secret string `env:"CLOUDINARY_API_SECRET,required"`
+	Url    string `env:"CLOUDINARY_URL,required"`
 }
 
 // JWTConfig holds configuration for JWT secret key

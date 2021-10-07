@@ -39,8 +39,9 @@ func main() {
 	}()
 
 	barangHandler := buildBarangHandler(db)
+	fileHandler := buildFileHandler(db)
 
-	engine := http.NewGinEngine(barangHandler, cfg.InternalConfig.Username, cfg.InternalConfig.Password)
+	engine := http.NewGinEngine(barangHandler, fileHandler, cfg.InternalConfig.Username, cfg.InternalConfig.Password)
 
 	server := &nethttp.Server{
 		Addr:    fmt.Sprintf(":%s", cfg.Port),
@@ -107,4 +108,10 @@ func buildBarangHandler(db *gorm.DB) *http.BarangHandler {
 	repo := repository.NewBarangRepository(db)
 	barangService := service.NewBarangService(repo)
 	return http.NewBarangHandler(barangService)
+}
+
+func buildFileHandler(db *gorm.DB) *http.FileHandler {
+	repo := repository.NewFileRepository(db)
+	fileService := service.NewFileService(repo)
+	return http.NewFileHandler(fileService)
 }

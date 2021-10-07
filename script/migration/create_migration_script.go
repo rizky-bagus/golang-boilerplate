@@ -50,6 +50,8 @@ func main() {
 	log.Info().Msg("  TableModel [" + (&entity.Streamed{}).TableName() + "]")
 	db.AutoMigrate(&entity.Barang{})
 	log.Info().Msg("  TableModel [" + (&entity.Barang{}).TableName() + "]")
+	db.AutoMigrate(&entity.File{})
+	log.Info().Msg("  TableModel [" + (&entity.File{}).TableName() + "]")
 
 }
 
@@ -111,7 +113,3 @@ func checkError(err error) {
 		panic(err)
 	}
 }
-
-// func registerMigration(id string, fm mFunc) {
-// 	migrations[id] = fm
-// }

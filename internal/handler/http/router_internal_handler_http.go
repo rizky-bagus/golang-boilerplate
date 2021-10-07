@@ -6,7 +6,7 @@ import (
 
 // NewGinEngine creates an instance of echo.Engine.
 // gin.Engine already implements net/http.Handler interface.
-func NewGinEngine(barangHandler *BarangHandler, internalUsername, internalPassword string) *echo.Echo {
+func NewGinEngine(barangHandler *BarangHandler, fileHandler *FileHandler, internalUsername, internalPassword string) *echo.Echo {
 	engine := echo.New()
 
 	// CORS
@@ -25,6 +25,8 @@ func NewGinEngine(barangHandler *BarangHandler, internalUsername, internalPasswo
 	engine.GET("/get-barang/:id", barangHandler.GetDetailBarang)
 	engine.PUT("/update-barang/:id", barangHandler.UpdateBarang)
 	engine.DELETE("/delete-barang/:id", barangHandler.DeleteBarang)
+
+	engine.POST("/uploud-file", fileHandler.CreateFile)
 
 	return engine
 }
